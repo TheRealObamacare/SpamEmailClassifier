@@ -3,6 +3,7 @@ import random
 import sklearn.model_selection as train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
+import pickle
 
 v = CountVectorizer()
 model = MultinomialNB()
@@ -27,4 +28,5 @@ model.fit(x_train_count, y_train)
 x_test_count = v.transform(x_test)
 print(model.score(x_test_count, y_test))
 
-print(model.predict(input('Enter a message to test: ')))
+with open("trained_model.pkl", "wb") as f:
+    pickle.dump(model, f)
